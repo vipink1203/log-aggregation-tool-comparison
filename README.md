@@ -1,6 +1,13 @@
 # Log Aggregation Tool Comparison
 
-This repository contains research comparing OpenObserve, Vector, and Elastic for log aggregation with S3 as a backend storage solution. The comparison focuses on features, performance, architecture, and cost-efficiency.
+This repository contains comprehensive research comparing OpenObserve, Vector, and Elastic for log aggregation with S3 as a backend storage solution. The comparison focuses on features, performance, architecture, and cost-efficiency.
+
+## Research Documents
+
+- [Executive Summary](executive-summary.md) - High-level overview of findings and recommendations
+- [Cost Analysis](cost-analysis.md) - Detailed cost comparison of the solutions
+- [Architecture Comparison](architecture-comparison.md) - Technical architecture analysis
+- [Deployment Guide](deployment-guide.md) - Practical implementation guidelines
 
 ## Table of Contents
 
@@ -16,6 +23,8 @@ This repository contains research comparing OpenObserve, Vector, and Elastic for
 ## Executive Summary
 
 Based on our analysis, **OpenObserve** emerges as the most cost-effective solution for log aggregation with S3 backend, offering significant cost savings compared to Elasticsearch while maintaining good performance for log aggregation workloads. Vector is a strong contender for those seeking a lightweight, high-performance data router with broad integration capabilities, while Elasticsearch on AWS provides a mature but more expensive solution with excellent search capabilities.
+
+For a comprehensive executive summary, please see the [Executive Summary](executive-summary.md) document.
 
 ## Comparison Overview
 
@@ -58,6 +67,8 @@ OpenObserve uses a modern columnar storage architecture that is optimized for lo
 - Query engine with SQL support
 - Single binary deployment option for simplicity
 
+For a detailed architectural analysis, see the [Architecture Comparison](architecture-comparison.md) document.
+
 ## Vector Analysis
 
 ### Pros
@@ -88,6 +99,8 @@ Vector can be deployed in various patterns, including:
 - Directly to S3 for cost-effective storage
 - As a pre-processor before sending to another system like OpenObserve or Elasticsearch
 - In a serverless architecture using AWS Lambda for processing S3 logs
+
+For deployment examples, see the [Deployment Guide](deployment-guide.md).
 
 ## Elastic on AWS Analysis
 
@@ -136,6 +149,8 @@ Elasticsearch on AWS (Amazon OpenSearch Service) provides a fully managed servic
 - **Vector with S3 storage** can achieve similar storage costs to OpenObserve, but requires additional components for search and visualization.
 
 - **Elasticsearch on AWS** costs can be optimized with UltraWarm and Cold Storage tiers, but hot storage remains expensive.
+
+For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) document.
 
 ## Architectural Considerations
 
