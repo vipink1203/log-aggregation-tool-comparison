@@ -1,6 +1,6 @@
 # Log Aggregation Tool Comparison
 
-This repository contains comprehensive research comparing OpenObserve, Vector, and Elastic for log aggregation with S3 as a backend storage solution. The comparison focuses on features, performance, architecture, and cost-efficiency.
+This repository contains comprehensive research comparing OpenObserve, Vector, Elastic on AWS (OpenSearch Service), and Elastic.co (Elastic Stack) for log aggregation with S3 as a backend storage solution. The comparison focuses on features, performance, architecture, and cost-efficiency.
 
 ## Research Documents
 
@@ -8,6 +8,7 @@ This repository contains comprehensive research comparing OpenObserve, Vector, a
 - [Cost Analysis](cost-analysis.md) - Detailed cost comparison of the solutions
 - [Architecture Comparison](architecture-comparison.md) - Technical architecture analysis
 - [Deployment Guide](deployment-guide.md) - Practical implementation guidelines
+- [Elastic.co Analysis](elastic-analysis.md) - Detailed analysis of Elastic.co offerings
 
 ## Table of Contents
 
@@ -16,29 +17,32 @@ This repository contains comprehensive research comparing OpenObserve, Vector, a
 - [OpenObserve Analysis](#openobserve-analysis)
 - [Vector Analysis](#vector-analysis)
 - [Elastic on AWS Analysis](#elastic-on-aws-analysis)
+- [Elastic.co Analysis](#elasticco-analysis)
 - [Cost Per GB Comparison](#cost-per-gb-comparison)
 - [Architectural Considerations](#architectural-considerations)
 - [Recommendation](#recommendation)
 
 ## Executive Summary
 
-Based on our analysis, **OpenObserve** emerges as the most cost-effective solution for log aggregation with S3 backend, offering significant cost savings compared to Elasticsearch while maintaining good performance for log aggregation workloads. Vector is a strong contender for those seeking a lightweight, high-performance data router with broad integration capabilities, while Elasticsearch on AWS provides a mature but more expensive solution with excellent search capabilities.
+Based on our analysis, **OpenObserve** emerges as the most cost-effective solution for log aggregation with S3 backend, offering significant cost savings compared to Elasticsearch while maintaining good performance for log aggregation workloads. Vector is a strong contender for those seeking a lightweight, high-performance data router with broad integration capabilities, while Elasticsearch (both AWS OpenSearch Service and Elastic.co) provides mature but more expensive solutions with excellent search capabilities.
 
 For a comprehensive executive summary, please see the [Executive Summary](executive-summary.md) document.
 
 ## Comparison Overview
 
-| Feature | OpenObserve | Vector | Elastic on AWS |
-|---------|-------------|--------|----------------|
-| **Primary Function** | Full observability platform | Data pipeline/router | Search and analytics engine |
-| **S3 Backend Support** | Native | Native | Via UltraWarm/ColdStorage |
-| **Storage Efficiency** | Very High | N/A (not a storage engine) | Low (without UltraWarm) |
-| **Cost Efficiency** | High | High | Low to Medium |
-| **Deployment Complexity** | Low | Medium | High |
-| **Query Language** | SQL-like | N/A | Elasticsearch DSL |
-| **Maturity** | New but rapidly evolving | Established | Very mature |
-| **Open Source** | Yes | Yes | Yes (with limitations) |
-| **Native Visualizations** | Yes | No | Yes (Kibana) |
+| Feature | OpenObserve | Vector | Elastic on AWS | Elastic.co |
+|---------|-------------|--------|----------------|------------|
+| **Primary Function** | Full observability platform | Data pipeline/router | Search and analytics engine | Full observability platform |
+| **S3 Backend Support** | Native | Native | Via UltraWarm/ColdStorage | Via Frozen Tier/Snapshots |
+| **Storage Efficiency** | Very High | N/A (not a storage engine) | Low (without UltraWarm) | Low to Medium |
+| **Cost Efficiency** | High | High | Low to Medium | Low |
+| **Deployment Complexity** | Low | Medium | High | High |
+| **Query Language** | SQL-like | N/A | Elasticsearch DSL | Elasticsearch DSL |
+| **Maturity** | New but rapidly evolving | Established | Very mature | Very mature |
+| **Open Source** | Yes | Yes | Yes (with limitations) | Yes (with limitations) |
+| **Native Visualizations** | Yes | No | Yes (Kibana) | Yes (Kibana) |
+| **Enterprise Features** | Limited | N/A | Moderate | Extensive |
+| **Ecosystem** | Growing | Integration-focused | Broad | Very broad |
 
 ## OpenObserve Analysis
 
@@ -129,6 +133,34 @@ Elasticsearch on AWS (Amazon OpenSearch Service) provides a fully managed servic
 - Kibana for visualization
 - Integration with AWS services
 
+## Elastic.co Analysis
+
+### Pros
+
+- **Comprehensive platform**: Full observability solution with logs, metrics, APM, and more
+- **Advanced features**: Machine learning, anomaly detection, and extensive analytics capabilities
+- **Mature ecosystem**: Very broad ecosystem with extensive integrations and plugins
+- **Deployment flexibility**: Self-managed or fully managed Elastic Cloud options
+- **Frozen tier**: Direct S3 search capabilities for cost-effective storage
+
+### Cons
+
+- **High cost**: Premium pricing compared to alternatives, especially for managed offerings
+- **Resource requirements**: Substantial compute and memory needs
+- **Operational complexity**: Requires significant expertise to operate efficiently
+- **S3 as secondary storage**: Not designed primarily for S3 storage like newer solutions
+
+### Architecture
+
+Elastic.co provides the Elastic Stack (formerly ELK Stack) with a tiered storage approach:
+
+- Hot tier for active, frequently accessed data
+- Warm tier for less active but still operational data
+- Cold tier for infrequent access
+- Frozen tier for searchable archives directly on S3
+
+For a detailed analysis of Elastic.co offerings, see the [Elastic.co Analysis](elastic-analysis.md) document.
+
 ## Cost Per GB Comparison
 
 | Solution | Storage Cost per GB/month | Notes |
@@ -138,6 +170,8 @@ Elasticsearch on AWS (Amazon OpenSearch Service) provides a fully managed servic
 | Elasticsearch on AWS (hot tier) | $0.125 - $0.238 | Depends on instance type and region |
 | Elasticsearch UltraWarm | $0.024 | Near S3 pricing but with query capability |
 | Elasticsearch Cold Storage | $0.01 | Similar to S3 Glacier pricing |
+| Elastic.co (hot tier) | $0.125 - $0.25 | Self-managed on EBS or Elastic Cloud |
+| Elastic.co (frozen tier) | $0.023 + compute | Direct search capability on S3 |
 
 ### Cost Analysis
 
@@ -148,7 +182,7 @@ Elasticsearch on AWS (Amazon OpenSearch Service) provides a fully managed servic
 
 - **Vector with S3 storage** can achieve similar storage costs to OpenObserve, but requires additional components for search and visualization.
 
-- **Elasticsearch on AWS** costs can be optimized with UltraWarm and Cold Storage tiers, but hot storage remains expensive.
+- **Elasticsearch on AWS and Elastic.co** costs can be optimized with tiered storage approaches, but hot storage remains expensive. Elastic.co's frozen tier provides a cost-effective option for less frequently accessed data but still requires compute resources for searching.
 
 For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) document.
 
@@ -171,9 +205,17 @@ For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) documen
 ### When to Choose Elasticsearch on AWS
 
 - When advanced search capabilities are essential
-- For organizations heavily invested in the Elastic ecosystem
+- For organizations heavily invested in the AWS ecosystem
 - When comprehensive visualization through Kibana is required
 - When managed service simplicity outweighs cost concerns
+
+### When to Choose Elastic.co
+
+- For organizations requiring the full Elastic ecosystem
+- When advanced features like machine learning and anomaly detection are needed
+- For enterprises with complex security and compliance requirements
+- When deployment flexibility (self-managed or cloud) is important
+- For teams already skilled in the Elastic Stack
 
 ## Recommendation
 
@@ -183,6 +225,8 @@ Based on the requirement for a cost-effective log aggregation solution with S3 b
 
 2. **For complex data pipelines**: A hybrid approach using Vector for collection and routing with OpenObserve as the backend offers flexibility and performance.
 
-3. **For enterprises with existing Elastic investment**: Consider using Elasticsearch UltraWarm and Cold Storage tiers to reduce costs while maintaining compatibility.
+3. **For enterprises with existing Elastic investment**: Consider using Elastic.co with frozen tier or Elasticsearch UltraWarm/Cold Storage tiers to reduce costs while maintaining compatibility.
+
+4. **For enterprises with advanced analytics requirements**: Elastic.co may justify its higher cost through additional capabilities like machine learning, anomaly detection, and comprehensive security features.
 
 The dramatic cost difference between traditional Elasticsearch and S3-based solutions like OpenObserve makes the latter particularly attractive for log data, which tends to be high-volume but infrequently queried once it ages past a certain point.
