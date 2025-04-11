@@ -9,6 +9,7 @@ This repository contains comprehensive research comparing OpenObserve, Vector, E
 - [Architecture Comparison](architecture-comparison.md) - Technical architecture analysis
 - [Deployment Guide](deployment-guide.md) - Practical implementation guidelines
 - [Elastic.co Analysis](elastic-analysis.md) - Detailed analysis of Elastic.co offerings
+- [Data Collection Comparison](data-collection-comparison.md) - Detailed comparison of data collection methods
 
 ## Table of Contents
 
@@ -18,6 +19,7 @@ This repository contains comprehensive research comparing OpenObserve, Vector, E
 - [Vector Analysis](#vector-analysis)
 - [Elastic on AWS Analysis](#elastic-on-aws-analysis)
 - [Elastic.co Analysis](#elasticco-analysis)
+- [Data Collection Comparison](#data-collection-comparison)
 - [Cost Per GB Comparison](#cost-per-gb-comparison)
 - [Architectural Considerations](#architectural-considerations)
 - [Recommendation](#recommendation)
@@ -43,6 +45,7 @@ For a comprehensive executive summary, please see the [Executive Summary](execut
 | **Native Visualizations** | Yes | No | Yes (Kibana) | Yes (Kibana) |
 | **Enterprise Features** | Limited | N/A | Moderate | Extensive |
 | **Ecosystem** | Growing | Integration-focused | Broad | Very broad |
+| **Data Collection** | Limited built-in | Extensive built-in | Via external tools | Comprehensive suite |
 
 ## OpenObserve Analysis
 
@@ -60,12 +63,13 @@ For a comprehensive executive summary, please see the [Executive Summary](execut
 - **Newer platform**: Less mature than Elasticsearch
 - **Smaller community**: Fewer resources, plugins, and third-party integrations
 - **Limited enterprise features**: Missing some advanced features found in commercial offerings
+- **Limited built-in data collection**: Relies on integration with third-party collectors
 
 ### Architecture
 
 OpenObserve uses a modern columnar storage architecture that is optimized for log data and aggregation queries. The system is designed to work natively with object storage like S3, which enables significant cost savings. Its architecture includes:
 
-- Ingestion layer that accepts data in multiple formats
+- Ingestion layer that accepts data via HTTP, FluentBit, Vector, and other collectors
 - Processing pipelines with Vector Remap Language (VRL) for transformation
 - Columnar storage engine optimized for observability data
 - Query engine with SQL support
@@ -82,6 +86,7 @@ For a detailed architectural analysis, see the [Architecture Comparison](archite
 - **Flexible pipeline**: Powerful transformation capabilities
 - **Broad integration**: Supports numerous sources and sinks, including S3
 - **Vendor-neutral**: Works with virtually any observability backend
+- **Excellent data collection**: Comprehensive built-in collection capabilities
 
 ### Cons
 
@@ -115,6 +120,7 @@ For deployment examples, see the [Deployment Guide](deployment-guide.md).
 - **Kibana integration**: Powerful built-in visualization and dashboard capabilities
 - **Scalability**: Can handle very large workloads
 - **UltraWarm and Cold Storage**: Reduced cost options for less frequently accessed data
+- **AWS native integration**: Seamless integration with AWS services
 
 ### Cons
 
@@ -122,6 +128,7 @@ For deployment examples, see the [Deployment Guide](deployment-guide.md).
 - **Resource intensive**: Requires substantial compute resources
 - **Complex management**: More difficult to set up and maintain
 - **Storage overhead**: Inefficient storage model for logs compared to columnar solutions
+- **No built-in collection**: Relies on external collection tools
 
 ### Architecture
 
@@ -142,6 +149,7 @@ Elasticsearch on AWS (Amazon OpenSearch Service) provides a fully managed servic
 - **Mature ecosystem**: Very broad ecosystem with extensive integrations and plugins
 - **Deployment flexibility**: Self-managed or fully managed Elastic Cloud options
 - **Frozen tier**: Direct S3 search capabilities for cost-effective storage
+- **Excellent data collection**: Comprehensive suite of purpose-built collection tools
 
 ### Cons
 
@@ -160,6 +168,62 @@ Elastic.co provides the Elastic Stack (formerly ELK Stack) with a tiered storage
 - Frozen tier for searchable archives directly on S3
 
 For a detailed analysis of Elastic.co offerings, see the [Elastic.co Analysis](elastic-analysis.md) document.
+
+## Data Collection Comparison
+
+Each platform offers different approaches to collecting logs and metrics:
+
+| Collection Method | OpenObserve | Vector | Elastic on AWS | Elastic.co |
+|-------------------|-------------|--------|----------------|------------|
+| **File Collection** | Via integrations | Native | Via integrations | Native (Filebeat/Agent) |
+| **Syslog Collection** | Basic | Advanced | Via integrations | Advanced |
+| **Windows Event Logs** | Via integrations | Basic | Via integrations | Native (Winlogbeat) |
+| **Container Logs** | Via integrations | Native | Via integrations | Native |
+| **Cloud Provider Logs** | Limited | Extensive | AWS-focused | Extensive |
+| **APM/Tracing** | Limited | None | Limited | Advanced |
+| **Built-in Collectors** | Limited | Extensive | None | Extensive |
+| **Management UI** | Basic | None | AWS Console | Fleet in Kibana |
+
+### OpenObserve Data Collection
+
+OpenObserve has limited built-in collection capabilities but integrates well with existing collectors:
+
+- **FluentBit Integration**: Output plugin for direct connection
+- **Vector Integration**: HTTP sink to OpenObserve endpoints
+- **Direct API Ingestion**: REST API for direct integration
+- **Kubernetes Integration**: Via collectors deployed as DaemonSets
+
+### Vector Data Collection
+
+Vector provides comprehensive built-in collection capabilities:
+
+- **File Input**: Tails files with efficient checkpointing
+- **System-Level Collection**: Syslog, journald, host metrics
+- **Application Integration**: TCP/UDP inputs, HTTP receiver
+- **Cloud Provider Integration**: AWS, GCP, Azure sources
+- **Kubernetes Integration**: Native container log collection
+- **Transformation**: Rich VRL language for processing
+
+### Elastic on AWS Data Collection
+
+AWS Elasticsearch Service relies on external collection mechanisms:
+
+- **AWS Native Integration**: CloudWatch Logs, Kinesis Firehose
+- **Open Source Collectors**: Fluent Bit, Fluentd, Logstash
+- **Beats Data Shippers**: Deployed on EC2 or containers
+- **Containerized Environments**: EKS with Fluent Bit DaemonSets
+
+### Elastic.co Data Collection
+
+Elastic.co offers a comprehensive suite of purpose-built collection tools:
+
+- **Elastic Agent**: Unified, centrally managed collector
+- **Beats Family**: Specialized lightweight data shippers
+- **Logstash**: Advanced data processing pipeline
+- **APM Agents**: Application performance monitoring
+- **Cloud Native Collection**: Lambda, GCF, Azure Functions
+
+For a detailed comparison of data collection methods, see the [Data Collection Comparison](data-collection-comparison.md) document.
 
 ## Cost Per GB Comparison
 
