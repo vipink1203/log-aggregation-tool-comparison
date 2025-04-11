@@ -222,6 +222,17 @@ Elastic.co offers a comprehensive suite of purpose-built collection tools:
 - **Logstash**: Advanced data processing pipeline
 - **APM Agents**: Application performance monitoring
 - **Cloud Native Collection**: Lambda, GCF, Azure Functions
+- **Fleet Management**: Centralized configuration and monitoring
+
+### Data Collection Recommendations
+
+When selecting a collection approach, consider these factors:
+
+- **Resource Constraints**: Vector offers the lowest resource utilization
+- **Management Overhead**: Elastic.co's Fleet provides the best centralized management
+- **Deployment Types**: Container-heavy environments might benefit from Vector's efficiency
+- **Transformation Needs**: Complex transformation benefits from Logstash or Vector
+- **Environment Diversity**: Multi-platform environments may benefit from Elastic.co's specialized collectors
 
 For a detailed comparison of data collection methods, see the [Data Collection Comparison](data-collection-comparison.md) document.
 
@@ -258,6 +269,8 @@ For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) documen
 - For organizations with significant log volumes
 - When a single, integrated observability platform is desired
 - For simpler deployments with minimal operational overhead
+- When columnar storage optimized for log analytics is important
+- When your existing infrastructure already includes Vector or FluentBit
 
 ### When to Choose Vector
 
@@ -265,6 +278,8 @@ For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) documen
 - In complex architectures where flexibility is paramount
 - When working with multiple backends (including sending to both S3 and another system)
 - For log preprocessing and transformation before storage
+- When efficient and versatile data collection is critical
+- In resource-constrained environments where efficiency matters
 
 ### When to Choose Elasticsearch on AWS
 
@@ -272,6 +287,8 @@ For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) documen
 - For organizations heavily invested in the AWS ecosystem
 - When comprehensive visualization through Kibana is required
 - When managed service simplicity outweighs cost concerns
+- When AWS native integration is important
+- For organizations with existing knowledge of Elasticsearch
 
 ### When to Choose Elastic.co
 
@@ -280,6 +297,8 @@ For a detailed cost breakdown, see the [Cost Analysis](cost-analysis.md) documen
 - For enterprises with complex security and compliance requirements
 - When deployment flexibility (self-managed or cloud) is important
 - For teams already skilled in the Elastic Stack
+- When comprehensive data collection and management is essential
+- When Windows environments are a significant part of your infrastructure
 
 ## Recommendation
 
@@ -292,5 +311,17 @@ Based on the requirement for a cost-effective log aggregation solution with S3 b
 3. **For enterprises with existing Elastic investment**: Consider using Elastic.co with frozen tier or Elasticsearch UltraWarm/Cold Storage tiers to reduce costs while maintaining compatibility.
 
 4. **For enterprises with advanced analytics requirements**: Elastic.co may justify its higher cost through additional capabilities like machine learning, anomaly detection, and comprehensive security features.
+
+5. **For comprehensive data collection needs**: 
+   - **Resource-constrained environments**: Use Vector for efficient collection
+   - **Heterogeneous environments**: Consider Elastic.co's specialized collectors
+   - **Centrally managed environments**: Elastic Agent with Fleet provides best management capabilities
+   - **Windows-heavy environments**: Elastic.co offers superior Windows integration
+
+6. **For optimal cost-performance balance**: Consider a tiered approach where:
+   - Hot data (7-30 days) is stored in OpenObserve
+   - Historical data is stored in S3 with lifecycle policies
+   - Vector is used for efficient collection and routing
+   - Critical application logs use APM tools from Elastic.co if needed
 
 The dramatic cost difference between traditional Elasticsearch and S3-based solutions like OpenObserve makes the latter particularly attractive for log data, which tends to be high-volume but infrequently queried once it ages past a certain point.
