@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="800" height="700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Elasticsearch Cluster -->
+  <rect x="50" y="20" width="700" height="180" rx="10" fill="none" stroke="#888" stroke-dasharray="5,5"/>
+  <text x="65" y="40" font-family="Arial" font-size="18" fill="#333">Elasticsearch Cluster</text>
+  
+  <!-- Node 1 -->
+  <g>
+    <rect x="90" y="70" width="120" height="120" rx="10" fill="none" stroke="#333"/>
+    <circle cx="130" cy="100" r="5" fill="#333"/>
+    <line x1="100" y1="115" x2="200" y2="115" stroke="#333" stroke-width="2"/>
+    <circle cx="130" cy="130" r="5" fill="#333"/>
+    <line x1="100" y1="145" x2="200" y2="145" stroke="#333" stroke-width="2"/>
+    <circle cx="130" cy="160" r="5" fill="#333"/>
+    <text x="90" y="200" font-family="Arial" font-size="14" fill="#333">Node 1</text>
+  </g>
+  
+  <!-- Node 2 -->
+  <g>
+    <rect x="340" y="70" width="120" height="120" rx="10" fill="none" stroke="#333"/>
+    <circle cx="380" cy="100" r="5" fill="#333"/>
+    <line x1="350" y1="115" x2="450" y2="115" stroke="#333" stroke-width="2"/>
+    <circle cx="380" cy="130" r="5" fill="#333"/>
+    <line x1="350" y1="145" x2="450" y2="145" stroke="#333" stroke-width="2"/>
+    <circle cx="380" cy="160" r="5" fill="#333"/>
+    <text x="340" y="200" font-family="Arial" font-size="14" fill="#333">Node 2</text>
+  </g>
+  
+  <!-- Node 3 -->
+  <g>
+    <rect x="590" y="70" width="120" height="120" rx="10" fill="none" stroke="#333"/>
+    <circle cx="630" cy="100" r="5" fill="#333"/>
+    <line x1="600" y1="115" x2="700" y2="115" stroke="#333" stroke-width="2"/>
+    <circle cx="630" cy="130" r="5" fill="#333"/>
+    <line x1="600" y1="145" x2="700" y2="145" stroke="#333" stroke-width="2"/>
+    <circle cx="630" cy="160" r="5" fill="#333"/>
+    <text x="590" y="200" font-family="Arial" font-size="14" fill="#333">Node 3</text>
+  </g>
+  
+  <!-- Connections between nodes -->
+  <line x1="210" y1="130" x2="340" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  <line x1="460" y1="130" x2="590" y2="130" stroke="#333" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  
+  <!-- Port labels -->
+  <text x="250" y="120" font-family="Arial" font-size="12" fill="#e83e8c">tcp/9300-9399</text>
+  <text x="500" y="120" font-family="Arial" font-size="12" fill="#e83e8c">tcp/9300-9399</text>
+  
+  <!-- Kibana Box -->
+  <rect x="800" y="350" width="300" height="150" rx="10" fill="none" stroke="#888" stroke-dasharray="5,5"/>
+  <text x="815" y="370" font-family="Arial" font-size="18" fill="#333">Kibana</text>
+  
+  <!-- Fleet UI -->
+  <rect x="820" y="390" width="120" height="100" rx="10" fill="none" stroke="#333"/>
+  <text x="850" y="445" font-family="Arial" font-size="14" fill="#333">Fleet UI</text>
+  
+  <!-- Observability UI -->
+  <rect x="960" y="390" width="120" height="100" rx="10" fill="none" stroke="#333"/>
+  <text x="985" y="430" font-family="Arial" font-size="12" fill="#333">Observability,</text>
+  <text x="990" y="450" font-family="Arial" font-size="12" fill="#333">Security, &</text>
+  <text x="990" y="470" font-family="Arial" font-size="12" fill="#333">Search UI</text>
+  
+  <!-- Fleet Server -->
+  <rect x="340" y="390" width="150" height="100" rx="10" fill="none" stroke="#333"/>
+  <text x="365" y="445" font-family="Arial" font-size="18" fill="#333">Fleet Server</text>
+  
+  <!-- User icon -->
+  <circle cx="1150" y="440" r="30" fill="none" stroke="#333" stroke-width="2"/>
+  <circle cx="1150" y="420" r="15" fill="none" stroke="#333" stroke-width="2"/>
+  <path d="M1120,480 Q1150,450 1180,480" fill="none" stroke="#333" stroke-width="2"/>
+  
+  <!-- Hosts box -->
+  <rect x="170" y="600" width="500" height="150" rx="10" fill="none" stroke="#888" stroke-dasharray="5,5"/>
+  <text x="185" y="620" font-family="Arial" font-size="18" fill="#333">Hosts</text>
+  
+  <!-- Elastic Agents -->
+  <rect x="190" y="640" width="120" height="80" rx="10" fill="none" stroke="#333"/>
+  <text x="200" y="690" font-family="Arial" font-size="14" fill="#333">Elastic Agent</text>
+  
+  <rect x="350" y="640" width="120" height="80" rx="10" fill="none" stroke="#333"/>
+  <text x="360" y="690" font-family="Arial" font-size="14" fill="#333">Elastic Agent</text>
+  
+  <rect x="510" y="640" width="120" height="80" rx="10" fill="none" stroke="#333"/>
+  <text x="520" y="690" font-family="Arial" font-size="14" fill="#333">Elastic Agent</text>
+  
+  <!-- Beats/Integrations boxes -->
+  <rect x="195" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  <rect x="245" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  
+  <rect x="355" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  <rect x="405" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  
+  <rect x="515" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  <rect x="565" y="730" width="40" height="35" rx="5" fill="none" stroke="#333"/>
+  
+  <text x="625" y="750" font-family="Arial" font-size="14" fill="#333">Beats/Integrations</text>
+  
+  <!-- Connection lines -->
+  <line x1="710" y1="150" x2="950" y2="350" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="850" y="320" font-family="Arial" font-size="12" fill="#333">Agent + policy</text>
+  <text x="850" y="335" font-family="Arial" font-size="12" fill="#333">management</text>
+  <text x="850" y="270" font-family="Arial" font-size="12" fill="#e83e8c">http/9200</text>
+  
+  <line x1="720" y1="390" x2="800" y2="390" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <line x1="70" y1="230" x2="90" y2="380" stroke="#333" stroke-width="2" marker-start="url(#arrow)"/>
+  <text x="30" y="330" font-family="Arial" font-size="12" fill="#333">Write logs & metrics</text>
+  <text x="30" y="345" font-family="Arial" font-size="12" fill="#333">to Elasticsearch</text>
+  <text x="95" y="380" font-family="Arial" font-size="12" fill="#e83e8c">http/9200</text>
+  
+  <line x1="415" y1="250" x2="415" y2="390" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="310" font-family="Arial" font-size="12" fill="#333">Fetch policies & actions</text>
+  
+  <line x1="415" y1="490" x2="415" y2="600" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="420" y="540" font-family="Arial" font-size="12" fill="#333">Dispatch policies & actions</text>
+  
+  <line x1="380" y1="600" x2="380" y2="490" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="320" y="550" font-family="Arial" font-size="12" fill="#333">Check in</text>
+  <text x="320" y="565" font-family="Arial" font-size="12" fill="#e83e8c">tcp/8220</text>
+  
+  <line x1="1100" y1="440" x2="1080" y2="440" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1110" y="430" font-family="Arial" font-size="12" fill="#e83e8c">http/5601</text>
+  
+  <!-- Arrow defs -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+  </defs>
+</svg>
