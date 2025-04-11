@@ -308,6 +308,19 @@ Elastic.co provides a comprehensive suite of data collection tools:
    - Azure Monitor integration
    - Cloud provider-specific beats modules
 
+### Elastic.co Architecture Diagram
+
+Below is a diagram showing the Elastic.co architectural components and how they interact:
+
+![Elastic.co Architecture Diagram](images/elastic-architecture.svg)
+
+The diagram illustrates:
+- Elasticsearch cluster with multiple nodes communicating over TCP ports 9300-9399
+- Kibana connected to Elasticsearch over HTTP port 9200
+- Fleet Server for centralized agent management
+- Elastic Agents deployed on hosts with various Beats integrations
+- Communication flows for policy management and data collection
+
 ### S3 Integration
 
 Elastic.co's S3 integration capabilities:
