@@ -8,7 +8,6 @@ This repository contains comprehensive research comparing OpenObserve, Vector, E
 - [Cost Analysis](cost-analysis.md) - Detailed cost comparison of the solutions
 - [Architecture Comparison](architecture-comparison.md) - Technical architecture analysis
 - [Deployment Guide](deployment-guide.md) - Practical implementation guidelines
-- [Elastic.co Analysis](elastic-analysis.md) - Detailed analysis of Elastic.co offerings
 - [Data Collection Comparison](data-collection-comparison.md) - Detailed comparison of data collection methods
 
 ## Table of Contents
@@ -167,7 +166,7 @@ Elastic.co provides the Elastic Stack (formerly ELK Stack) with a tiered storage
 - Cold tier for infrequent access
 - Frozen tier for searchable archives directly on S3
 
-For a detailed analysis of Elastic.co offerings, see the [Elastic.co Analysis](elastic-analysis.md) document.
+For more details on Elastic.co, see the relevant sections in the [Architecture Comparison](architecture-comparison.md) document.
 
 ## Data Collection Comparison
 
